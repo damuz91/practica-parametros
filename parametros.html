@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Encabezado de la página WEB-->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parámetros</title>
+  <!-- Framework gráfico de bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+  <!-- Script para cargar los parámetroos -->
+  <script>
+    
+    // Ejecute lo siguiente cuando cargue la página
+    window.onload = function() {
+      // Cargar los parámetros
+      leerParametros();
+    };
+
+    // Leer los parámetros desde la URL
+    function leerParametros(){
+      // Obtener los parámetros de la URL
+      var url_string = window.location.href;
+      var url = new URL(url_string);
+      // Obtener el parámetro de la URL
+      var usuario = url.searchParams.get("usuario");
+      var clave = url.searchParams.get("clave");
+      if(esVacio(usuario) || esVacio(clave)){
+        document.getElementById("subtitulo").innerHTML = "No se han encontrado parámetros";
+      }else{
+        document.getElementById("subtitulo").innerHTML = "Se encontraron los parámetros!";
+        document.getElementById("usuario").innerHTML = usuario;
+        document.getElementById("clave").innerHTML = clave;
+      }
+    }
+
+    function esVacio(texto){
+      return (!texto || texto.length === 0 );
+    }
+  </script>
+</head>
+<body>
+  <!-- Código de la página-->
+  <h1>Aprendiendo de parámetros</h1>
+  <h1 style="color: blue;" id="subtitulo"></h1>
+  <h2>Formulario</h2>
+  <form action="?" method="get">
+    <!-- Usuario -->
+    <div class="form-group">
+      <label for="usuario">Usuario</label>
+      <input type="email" name="usuario" class="form-control">
+    </div>
+    <!-- Clave -->
+    <div class="form-group">
+      <label for="clave">Clave</label>
+      <input type="password" name="clave" class="form-control">
+    </div>
+    <!-- Botón -->
+    <button type="submit" class="btn btn-primary">Enviar</button>
+  </form>
+  <h2>Revisión de parámetros</h2>
+  <table class="table">
+    <tr>
+      <th>Parámetro</th>
+      <th>Valor</th>
+    </tr>
+    <tr>
+      <td>Usuario</td>
+      <td><span id="usuario"></span></td>
+    </tr>
+    <tr>
+      <td>Clave</td>
+      <td><span id="clave"></span></td>
+    </tr>
+  </table>
+</body>
+</html>
